@@ -65,8 +65,8 @@ public class MyView extends View {
         circley = 350;
 
         setBackgroundColor(Color.BLUE);
-    }
 
+    }
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

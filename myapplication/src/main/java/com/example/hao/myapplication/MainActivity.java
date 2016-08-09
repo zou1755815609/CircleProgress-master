@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity {
 //        LSITS.add(new BlankFragment());
 //        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager()));
 
+
 //        Log.e()
     }
 
