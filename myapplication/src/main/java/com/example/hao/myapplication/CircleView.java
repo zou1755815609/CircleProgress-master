@@ -22,6 +22,8 @@ public class CircleView extends View {
     private float singlPoint = 9;
     private float lineWidth = 0.3f;
     private float progress = 0;
+    private int currtJd = 0;
+    private int setJd = 120;
     //圆环颜色
     private int[] doughnutColors = new int[]{Color.GREEN, Color.YELLOW, Color.RED};
 
@@ -39,9 +41,9 @@ public class CircleView extends View {
         smallCirclePaint.setAntiAlias(true);
         smallCirclePaint.setStrokeWidth(2);
         smallCirclePaint.setColor(Color.YELLOW);
-        mectF = new RectF(50,50,350, 350);
+        mectF = new RectF(50, 50, 350, 350);
         mPath = new Path();
-        mPath.addArc(mectF, 0,150);
+        mPath.addArc(mectF, 0, 150);
 //        bigCirclePaint.setStrokeWidth(90);
 //        bigCirclePaint.setStyle(Paint.Style.STROKE);
     }
@@ -54,7 +56,7 @@ public class CircleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        SweepGradient lg=new SweepGradient(200,200,doughnutColors,null);  //
+        SweepGradient lg = new SweepGradient(200, 200, doughnutColors, null);  //
         bigCirclePaint.setShader(lg);
         canvas.drawCircle(200, 200, 150, bigCirclePaint);
         float start = -90f;
@@ -66,19 +68,42 @@ public class CircleView extends View {
 //            canvas.drawArc(mectF, start + singlPoint - lineWidth, lineWidth, false,smallCirclePaint);
 //            start = (start + singlPoint);
 //        }
-        float degrees = (float) (360.0/100);
-        smallCirclePaint.setColor(Color.RED);
+        float degrees = (float) (360.0 / 120);
+        smallCirclePaint.setColor(Color.WHITE);
         canvas.save();
-        canvas.translate(50,200);
-        for(int i = 0;i<100;i++){
-            canvas.drawLine(0, 0, 20, 0, smallCirclePaint);
+        canvas.translate(50, 200);
+        for (int i = 0; i < 120; i++) {
+//            if (i % 10 == 0) {
+//                canvas.drawLine(0, 0, 25, 0, smallCirclePaint);
+//            } else {
+//                canvas.drawLine(0, 0, 10, 0, smallCirclePaint);
+//            }
+            canvas.drawLine(0, 0, 30, 0, smallCirclePaint);
+            canvas.rotate(degrees, 150, 0);
+        }
+        smallCirclePaint.setColor(Color.GRAY);
+        for (int i = 0; i < currtJd; i++) {
+//            if (i % 10 == 0) {
+//                canvas.drawLine(0, 0, 25, 0, smallCirclePaint);
+//            } else {
+//                canvas.drawLine(0, 0, 10, 0, smallCirclePaint);
+//            }
+            canvas.drawLine(0, 0, 30, 0, smallCirclePaint);
             canvas.rotate(degrees, 150, 0);
         }
         canvas.save();
-        canvas.translate(-50,-200);
+        canvas.translate(-50, -200);
         smallCirclePaint.setColor(Color.BLUE);
-        canvas.drawArc(mectF,-180,90,true, smallCirclePaint);
+//        canvas.drawArc(mectF, -180, 90, true, smallCirclePaint);
         smallCirclePaint.setColor(Color.WHITE);
-        canvas.drawCircle(200, 200, 80, smallCirclePaint);
+        canvas.drawCircle(200, 200, 120, smallCirclePaint);
+        if (currtJd <= 120) {
+            try {
+                Thread.sleep(200);
+                currtJd++;
+                postInvalidate();
+            } catch (Exception e) {
+            }
+        }
     }
 }
