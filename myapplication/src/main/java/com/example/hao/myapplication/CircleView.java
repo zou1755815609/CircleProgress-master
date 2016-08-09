@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -21,6 +22,8 @@ public class CircleView extends View {
     private float singlPoint = 9;
     private float lineWidth = 0.3f;
     private float progress = 0;
+    //圆环颜色
+    private int[] doughnutColors = new int[]{Color.GREEN, Color.YELLOW, Color.RED};
 
 
     public CircleView(Context context, AttributeSet attrs) {
@@ -32,14 +35,15 @@ public class CircleView extends View {
         bigCirclePaint = new Paint();
         bigCirclePaint.setAntiAlias(true);
         bigCirclePaint.setStrokeWidth(2);
-        bigCirclePaint.setColor(Color.GRAY);
         smallCirclePaint = new Paint();
         smallCirclePaint.setAntiAlias(true);
         smallCirclePaint.setStrokeWidth(2);
         smallCirclePaint.setColor(Color.YELLOW);
-        mectF = new RectF(50, 50, 350, 350);
+        mectF = new RectF(50,50,350, 350);
         mPath = new Path();
         mPath.addArc(mectF, 0,150);
+//        bigCirclePaint.setStrokeWidth(90);
+//        bigCirclePaint.setStyle(Paint.Style.STROKE);
     }
 
     @Override
@@ -50,6 +54,8 @@ public class CircleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        SweepGradient lg=new SweepGradient(200,200,doughnutColors,null);  //
+        bigCirclePaint.setShader(lg);
         canvas.drawCircle(200, 200, 150, bigCirclePaint);
         float start = -90f;
 //        float p = ((float) maxColorNumber / (float) 100);
